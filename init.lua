@@ -27,7 +27,19 @@ local plugins = {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.8',
 	   dependencies = { 'nvim-lua/plenary.nvim' }
 	},
-  {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"}
+  {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", 
+      "MunifTanjim/nui.nvim",
+    },
+    lazy = false, 
+    opts = {
+    },
+  }
 }
 
 local opt = {}
@@ -39,7 +51,7 @@ require("lazy").setup({plugins, opts
 -- Setup telecope
 local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fag', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 
 -- Setup tree siter
 local config = require("nvim-treesitter.configs")
@@ -48,6 +60,10 @@ config.setup({
   highlight = { enable = true },
   indent = { enable = true },
 })
+
+-- Key maps for neo tree
+vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left<CR>')
+vim.keymap.set('n', '<C-b>', ':Neotree close<CR>')
 
 -- Setup colourscheme
 require("catppuccin").setup()
