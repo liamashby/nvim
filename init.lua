@@ -26,8 +26,10 @@ local plugins = {
 	{
 	  'nvim-telescope/telescope.nvim', tag = '0.1.8',
 	   dependencies = { 'nvim-lua/plenary.nvim' }
-	}
+	},
+  {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"}
 }
+
 local opt = {}
 
 -- Setup lazy.nvim
@@ -37,6 +39,15 @@ require("lazy").setup({plugins, opts
 -- Setup telecope
 local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fag', builtin.live_grep, {})
+
+-- Setup tree siter
+local config = require("nvim-treesitter.configs")
+config.setup({
+  ensure_installed = {"lua", "python"},
+  highlight = { enable = true },
+  indent = { enable = true },
+})
 
 -- Setup colourscheme
 require("catppuccin").setup()
