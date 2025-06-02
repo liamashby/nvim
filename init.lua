@@ -25,24 +25,3 @@ local opt = {}
 
 -- Setup lazy.nvim
 require("lazy").setup("plugins")
-
--- Setup telecope
-local builtin = require("telescope.builtin")
-vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-
--- Setup tree siter
-local config = require("nvim-treesitter.configs")
-config.setup({
-  ensure_installed = {"lua", "python"},
-  highlight = { enable = true },
-  indent = { enable = true },
-})
-
--- Key maps for neo tree
-vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left<CR>')
-vim.keymap.set('n', '<C-b>', ':Neotree close<CR>')
-
--- Setup colourscheme
-require("catppuccin").setup()
-vim.cmd.colorscheme "catppuccin"
