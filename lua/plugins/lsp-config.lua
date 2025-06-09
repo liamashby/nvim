@@ -8,16 +8,11 @@ return {
   },
   {
     "mason-org/mason-lspconfig.nvim",
-    opts = {
-        ensure_installed = { "lua_ls" },
-    },
+    opt = {},
     dependencies = {
         { "mason-org/mason.nvim", opts = {} },
         "neovim/nvim-lspconfig",
-    },
-    config = function()
-      require("mason-lspconfig").setup()
-    end
+    }
   },
   {
     "neovim/nvim-lspconfig",
@@ -28,6 +23,7 @@ return {
           ['lus_ls'] = {},
           },
         })
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
     end
   }
 }
